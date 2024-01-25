@@ -91,11 +91,11 @@
             sonatype/nexus3
 
         # Get Initial Nexus admin user's password
-        # $ docker exec nexus bash -c "cat /var/jenkins_home/secrets/initialAdminPassword"
+        # $ docker exec nexus bash -c "cat /nexus-data/admin.password"
         # [Alternative]
         # SSH to the container and run the cat command
         # $ docker exec -it nexus /bin/bash
-        # jenkins@5fee21dbdb74:/$ cat /var/jenkins_home/secrets/initialAdminPassword
+        # jenkins@5fee21dbdb74:/$ cat /nexus-data/admin.password
     ```
 
     - Use a URL like http://ip-address/app/nexus to access Nexus via nginx reverse proxy (follow nginx setup instructions below). If port 8081 is exposed you can alternavitvely access the Jenkins directry by mentioning the port number like http://ip-address:8081/app/nexus.
@@ -186,3 +186,8 @@
   > -  **CPU usage** is the percentage of time a CPU takes to process non-idle tasks. CPU Usage can only be measured over a specified interval of time. We can determine the CPU usage by taking the percentage of time spent idling and subtracting it from 100. 
   > - **Reference:** https://www.baeldung.com/linux/get-cpu-usage
 
+
+
+
+Need to run this in jenkins container:
+ssh-keyscan github.com >> ~/.ssh/known_hosts
