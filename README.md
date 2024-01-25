@@ -95,7 +95,7 @@
         # [Alternative]
         # SSH to the container and run the cat command
         # $ docker exec -it nexus /bin/bash
-        # jenkins@5fee21dbdb74:/$ cat /nexus-data/admin.password
+        # nexus@5fee21dbdb74:/$ cat /nexus-data/admin.password
     ```
 
     - Use a URL like http://ip-address/app/nexus to access Nexus via nginx reverse proxy (follow nginx setup instructions below). If port 8081 is exposed you can alternavitvely access the Jenkins directry by mentioning the port number like http://ip-address:8081/app/nexus.

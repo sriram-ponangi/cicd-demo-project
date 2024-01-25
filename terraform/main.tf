@@ -4,7 +4,7 @@ provider "aws" {
 
 resource "aws_instance" "example" {
   ami           = "ami-09694bfab577e90b0"  # Specify your desired AMI ID
-  instance_type = "m7a.xlarge"  # Specify your desired instance type
+  instance_type = "t3a.xlarge"  # Specify your desired instance type
   key_name      = "POC_APP_SERVER_1"  # Specify the name of your existing key pair
   vpc_security_group_ids = [aws_security_group.allow_http_https.id]  # Attach security group to EC2 instance
 
@@ -23,19 +23,19 @@ resource "aws_instance" "example" {
 
               sudo docker network create devops-network
 
-              sudo docker run -d --name jenkins \
+              sudo docker run --rm -d --name jenkins \
               --net devops-network \
               --env JENKINS_OPTS="--prefix=/app/jenkins" \
               -v jenkins:/var/jenkins_home jenkins/jenkins:lts-jdk17
 
-              sudo docker run -d \
+              sudo docker run --rm -d \
               --name nexus \
               --net devops-network \
               -v nexus-data:/nexus-data \
               --env NEXUS_CONTEXT="app/nexus" \
               sonatype/nexus3
 
-              sudo docker run -d \
+              sudo docker run --rm -d \
               -v sonarqube_data:/opt/sonarqube/data \
               -v sonarqube_extensions:/opt/sonarqube/extensions \
               -v sonarqube_logs:/opt/sonarqube/logs \
@@ -44,7 +44,7 @@ resource "aws_instance" "example" {
               --name sonarqube \
               sonarqube:10.3.0-community
                 
-              sudo docker run -d -p 80:80 \
+              sudo docker run --rm -d -p 80:80 \
               -v nginx:/etc/nginx --net devops-network \
               --name nginx  nginx:1.25.3
 
